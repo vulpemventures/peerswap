@@ -119,6 +119,7 @@ func GetClientConnection(ctx context.Context, cfg *peerswaplnd.LndConfig) (*grpc
 	opts := []grpc.DialOption{
 		grpc.WithTransportCredentials(creds),
 		grpc.WithBlock(),
+		grpc.FailOnNonTempDialError(true),
 		grpc.WithPerRPCCredentials(cred),
 		grpc.WithDefaultCallOptions(maxMsgRecvSize),
 		grpc.WithStreamInterceptor(grpc_retry.StreamClientInterceptor(
@@ -181,6 +182,7 @@ func getClientConnectionForTests(ctx context.Context, cfg *peerswaplnd.LndConfig
 	opts := []grpc.DialOption{
 		grpc.WithTransportCredentials(creds),
 		grpc.WithBlock(),
+		grpc.FailOnNonTempDialError(true),
 		grpc.WithPerRPCCredentials(cred),
 		grpc.WithDefaultCallOptions(maxMsgRecvSize),
 		grpc.WithStreamInterceptor(grpc_retry.StreamClientInterceptor(
